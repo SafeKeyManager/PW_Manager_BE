@@ -36,13 +36,13 @@ class SiteController (
     fun addSite(
         @RequestBody @Validated
         request: SiteAddRequestDto
-    ) {
+    ): String{
         return siteService.addSite(request)
     }
 
     // TODO : request 요청을 post가 맞는지 delete가 맞는지 아직 고민중
     @PostMapping("/site/delete/{siteId}")
-    fun removeSite(@PathVariable("siteId") siteId: Long){
+    fun removeSite(@PathVariable("siteId") siteId: Long): String{
         return siteService.removeSite(siteId)
     }
 
@@ -51,7 +51,7 @@ class SiteController (
     @PostMapping("/site/updateCycle/{siteId}")
     fun updateCycle(
         @PathVariable("siteId") siteId: Long
-    ) {
+    ): String{
         return siteService.updateCycle(siteId)
     }
 
@@ -62,7 +62,4 @@ class SiteController (
     ) : String{
         return siteService.updateSiteInfo(siteId, request)
     }
-
-
-
 }
