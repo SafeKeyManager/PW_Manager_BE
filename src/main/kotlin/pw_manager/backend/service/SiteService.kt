@@ -1,19 +1,16 @@
 package pw_manager.backend.service
 
-import org.springframework.cglib.core.Local
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import pw_manager.backend.dto.SearchDto
-import pw_manager.backend.dto.SiteAddRequestDto
-import pw_manager.backend.dto.SiteUpdateRequestDto
+import pw_manager.backend.dto.request.SearchDto
+import pw_manager.backend.dto.request.SiteAddRequestDto
+import pw_manager.backend.dto.request.SiteUpdateRequestDto
+import pw_manager.backend.dto.response.SiteAddResponseDto
 import pw_manager.backend.entity.Site
 import pw_manager.backend.entity.Site.SiteStatus.*
 import pw_manager.backend.repository.SiteRepository
-import java.time.LocalDateTime
-import java.time.LocalDateTime.*
-import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatter.*
 
 @Service
@@ -21,12 +18,16 @@ import java.time.format.DateTimeFormatter.*
 class SiteService (
     private val siteRepository: SiteRepository
 ){
-    // TODO : responseDto로 LocalDateTime은 String으로 변환해서 front 에게 넘겨준다
     fun getAllList(
         searchDto: SearchDto,
         pageable: Pageable
-    ) : Page<Site>{
-        return siteRepository.findBySiteNameContaining(searchDto.search, pageable)
+    ) : Page<SiteAddResponseDto>{
+        return siteRepository.findBySiteNameContainingAndSiteStatusNot(searchDto.search, DELETE, pageable).map {
+            SiteAddResponseDto(
+                it.id!!, it.siteName, it.siteUrl, it.updateCycle.toString(),
+                it.createDate.format(ISO_DATE),
+                it.createDate.format(ISO_DATE)
+            ) }
     }
 
     @Transactional

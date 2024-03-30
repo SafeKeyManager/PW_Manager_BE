@@ -1,4 +1,4 @@
-package pw_manager.backend.dto
+package pw_manager.backend.dto.request
 
 import jakarta.validation.constraints.NotNull
 

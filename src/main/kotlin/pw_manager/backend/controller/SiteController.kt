@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import pw_manager.backend.dto.SearchDto
-import pw_manager.backend.dto.SiteAddRequestDto
-import pw_manager.backend.dto.SiteUpdateRequestDto
-import pw_manager.backend.entity.Site
+import pw_manager.backend.dto.request.SearchDto
+import pw_manager.backend.dto.request.SiteAddRequestDto
+import pw_manager.backend.dto.request.SiteUpdateRequestDto
+import pw_manager.backend.dto.response.SiteAddResponseDto
 import pw_manager.backend.service.SiteService
 
 @RestController
@@ -28,7 +28,7 @@ class SiteController (
         searchDto: SearchDto,
         @PageableDefault(size = 10)
         pageable: Pageable
-    ):ResponseEntity<Page<Site>>{
+    ):ResponseEntity<Page<SiteAddResponseDto>>{
         return ResponseEntity.ok(siteService.getAllList(searchDto, pageable))
     }
 

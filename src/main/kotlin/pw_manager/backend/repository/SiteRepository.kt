@@ -8,5 +8,5 @@ import pw_manager.backend.entity.Site
 
 @Repository
 interface SiteRepository : JpaRepository<Site, Long>{
-    fun findBySiteNameContaining(siteName : String, pageable: Pageable) : Page<Site>
+    fun findBySiteNameContainingAndSiteStatusNot(siteName : String, siteStatus: Site.SiteStatus, pageable: Pageable) : Page<Site>
 }
