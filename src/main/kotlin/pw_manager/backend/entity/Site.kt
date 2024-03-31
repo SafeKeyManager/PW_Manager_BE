@@ -9,9 +9,12 @@ import java.time.LocalDateTime.*
 
 @Entity
 class Site(
+    @ManyToOne
+    @JoinColumn(name = "member_Id")
+    val member: Member,
     var siteName : String,
     var siteUrl : String,
-    var updateCycle : Long,   // TODO : responseDto 에서는 String 으로 응답
+    var updateCycle : Long,
 ) {
     @Id @GeneratedValue
     val id : Long? = null

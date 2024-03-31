@@ -9,6 +9,7 @@ import pw_manager.backend.dto.request.SearchDto
 import pw_manager.backend.dto.request.SiteAddRequestDto
 import pw_manager.backend.dto.request.SiteUpdateRequestDto
 import pw_manager.backend.dto.response.SiteAddResponseDto
+import pw_manager.backend.entity.Member
 import pw_manager.backend.entity.Site
 import pw_manager.backend.entity.Site.SiteStatus.*
 import pw_manager.backend.repository.SiteRepository
@@ -18,7 +19,8 @@ import kotlin.NullPointerException
 @Service
 @Transactional(readOnly = true)
 class SiteService (
-    private val siteRepository: SiteRepository
+    private val siteRepository: SiteRepository,
+    private val memberService: MemberService
 ){
     // TODO : kotlin 엘비스 연산자로만 처리해보기
     fun getAllList(
@@ -43,7 +45,12 @@ class SiteService (
 
     @Transactional
     fun addSite(request : SiteAddRequestDto): String{
-        siteRepository.save(Site(request.siteName, request.siteUrl, request.siteCycle))
+        // TODO : oauth2 기능 만들고 삭제하기
+        val member = Member("password","email")
+        val saveMember = memberService.saveMember(member)
+        val saveSite = siteRepository.save(Site(saveMember, request.siteName, request.siteUrl, request.siteCycle))
+        // TODO : Entity 내부적으로 연관관계 처리하기
+        saveMember.sites.add(saveSite)
         return "ok"
     }
 
