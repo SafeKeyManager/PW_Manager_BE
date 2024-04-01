@@ -1,7 +1,7 @@
 package pw_manager.backend.dto.request
 
 data class FcmMessageDto(
-    val validateOnly: Boolean,
+    val validateOnly: Boolean = false,
     val message: Message
 ) {
     data class Message(

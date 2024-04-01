@@ -15,6 +15,7 @@ import java.util.*
 @Service
 class FcmServiceImpl:FcmService{
     override fun sendMessageTo(fcmSendDto: FcmSendDto): Int {
+        println("fcmSendDto = ${fcmSendDto}")
         val message = makeMessage(fcmSendDto)
         val restTemplate = RestTemplate()
 
@@ -23,7 +24,7 @@ class FcmServiceImpl:FcmService{
         headers["Authorization"] = "Bearer ${getAccessToken()}"
         val entity = HttpEntity(message, headers)
 
-        val API_URL = "<https://fcm.googleapis.com/v1/projects/pw-manager-97400/messages:send>"
+        val API_URL = ("https://fcm.googleapis.com/v1/projects/pw-manager-97400/messages:send")
         val response = restTemplate.exchange(API_URL, HttpMethod.POST, entity, String::class.java)
 
         println(response.statusCode)
@@ -31,13 +32,14 @@ class FcmServiceImpl:FcmService{
     }
 
     @Throws(IOException::class)
-    private fun getAccessToken(): String{
+    private fun getAccessToken(): String {
         val firebaseConfigPath = "firebase/firebase_service_key.json"
 
         val googleCredentials = GoogleCredentials
             .fromStream(ClassPathResource(firebaseConfigPath).inputStream)
-            .createScoped("<https://www.googleapis.com/auth/cloud-platform>")
+            .createScoped(listOf("https://www.googleapis.com/auth/cloud-platform"))
         googleCredentials.refreshIfExpired()
+
         return googleCredentials.accessToken.tokenValue
     }
 
