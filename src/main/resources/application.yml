@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/PW_manager?useSSL=false
-    username: root
-    password: rladbqls1208
+    url: ${spring_db_url}
+    username: ${spring_db_username}
+    password: ${spring_db_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
