@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import pw_manager.backend.dto.request.SearchDto
 import pw_manager.backend.dto.request.SiteAddRequestDto
 import pw_manager.backend.dto.request.SiteUpdateRequestDto
 import pw_manager.backend.dto.response.SiteAddResponseDto
+import pw_manager.backend.entity.Site
 import pw_manager.backend.service.SiteService
 
 @RestController
@@ -34,10 +36,17 @@ class SiteController (
 
     @PostMapping("/site/add")
     fun addSite(
-        @RequestBody @Validated
-        request: SiteAddRequestDto
-    ): String{
-        return siteService.addSite(request)
+            @RequestBody @Validated
+            request: SiteAddRequestDto
+    ): ResponseEntity<Site>{
+
+        val site = siteService.addSite(request)
+        val location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(site.id)
+                .toUri()
+
+        return ResponseEntity.created(location).body(site)
     }
 
     // TODO : request 요청을 post가 맞는지 delete가 맞는지 아직 고민중
