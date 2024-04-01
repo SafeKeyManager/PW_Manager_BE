@@ -44,14 +44,14 @@ class SiteService (
     }
 
     @Transactional
-    fun addSite(request : SiteAddRequestDto): String{
+    fun addSite(request : SiteAddRequestDto): Site{
         // TODO : oauth2 기능 만들고 삭제하기
         val member = Member("password","email")
         val saveMember = memberService.saveMember(member)
         val saveSite = siteRepository.save(Site(saveMember, request.siteName, request.siteUrl, request.siteCycle))
         // TODO : Entity 내부적으로 연관관계 처리하기
         saveMember.sites.add(saveSite)
-        return "ok"
+        return saveSite
     }
 
     @Transactional

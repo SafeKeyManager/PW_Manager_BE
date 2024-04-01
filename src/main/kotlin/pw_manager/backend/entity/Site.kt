@@ -1,5 +1,6 @@
 package pw_manager.backend.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import jakarta.persistence.EnumType.*
 import pw_manager.backend.dto.request.SiteUpdateRequestDto
@@ -11,6 +12,7 @@ import java.time.LocalDateTime.*
 class Site(
     @ManyToOne
     @JoinColumn(name = "member_Id")
+    @JsonIgnore
     val member: Member,
     var siteName : String,
     var siteUrl : String,
