@@ -10,7 +10,7 @@ import java.time.LocalDate.*
 @Entity
 class Member (
     val userHash: String,
-    val email : String,
+    var email : String,
 ){
     @Id @GeneratedValue
     val id : Long? = null
