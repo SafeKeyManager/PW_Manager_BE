@@ -12,9 +12,10 @@ import pw_manager.backend.dto.response.SiteAddResponseDto
 import pw_manager.backend.entity.Member
 import pw_manager.backend.entity.Site
 import pw_manager.backend.entity.Site.SiteStatus.*
+import pw_manager.backend.exception.ErrorCode.*
+import pw_manager.backend.exception.SiteException
 import pw_manager.backend.repository.SiteRepository
 import java.time.format.DateTimeFormatter.*
-import kotlin.NullPointerException
 
 @Service
 @Transactional(readOnly = true)
@@ -30,7 +31,7 @@ class SiteService (
         val findSite =
             siteRepository.findBySiteNameContainingAndSiteStatusNot(searchDto.search, DELETE, pageable)
         if(findSite.isEmpty){
-            throw NullPointerException("null")
+            throw SiteException(NOT_FOUND)
         }
         return findSite.map{
             it?.let {
@@ -55,25 +56,33 @@ class SiteService (
     }
 
     @Transactional
-    fun removeSite(siteId: Long): String{
+    fun removeSite(siteId: Long): Long?{
         siteRepository.findByIdOrNull(siteId)
-            ?.let { it.siteStatus = DELETE }
-            ?: throw NullPointerException("siteId = $siteId Not Found")
-        return "ok"
+            ?.let {
+                it.siteStatus = DELETE
+                return it.id
+            }
+            ?: throw SiteException(NOT_FOUND)
+        // TODO : site ID 를 출력할수 있는 보조 생성자 만들기
+        //?: throw NullPointerException("siteId = $siteId Not Found")
     }
 
     @Transactional
-    fun updateCycle(siteId: Long): String{
+    fun updateCycle(siteId: Long): Long? {
         siteRepository.findByIdOrNull(siteId)
-            ?.let { it.updateDate = it.updateDate.plusDays(it.updateCycle) }
-            ?: throw NullPointerException("siteId = $siteId Not Found")
-        return "ok"
+            ?.let {
+                it.updateDate = it.updateDate.plusDays(it.updateCycle)
+                return it.id
+            }
+            ?: throw SiteException(NOT_FOUND)
     }
 
     @Transactional
-    fun updateSiteInfo(siteId: Long, request: SiteUpdateRequestDto): String {
-        siteRepository.findByIdOrNull(siteId)?.updateSite(request)
-            ?: throw NullPointerException("siteId = $siteId Not Found")
-        return "ok"
+    fun updateSiteInfo(siteId: Long, request: SiteUpdateRequestDto): Long? {
+        siteRepository.findByIdOrNull(siteId)?.let {
+            it.updateSite(request)
+            return it.id
+        }
+        ?: throw SiteException(NOT_FOUND)
     }
 }

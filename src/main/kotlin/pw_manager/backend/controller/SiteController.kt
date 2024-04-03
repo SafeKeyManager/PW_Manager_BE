@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import pw_manager.backend.dto.request.SearchDto
 import pw_manager.backend.dto.request.SiteAddRequestDto
 import pw_manager.backend.dto.request.SiteUpdateRequestDto
+import pw_manager.backend.dto.response.IdResponseDto
 import pw_manager.backend.dto.response.SiteAddResponseDto
 import pw_manager.backend.entity.Site
 import pw_manager.backend.service.SiteService
@@ -50,25 +51,25 @@ class SiteController (
     }
 
     // TODO : request 요청을 post가 맞는지 delete가 맞는지 아직 고민중
-    @PostMapping("/site/delete/{siteId}")
-    fun removeSite(@PathVariable("siteId") siteId: Long): String{
-        return siteService.removeSite(siteId)
+    @PostMapping("/site/{siteId}/delete")
+    fun removeSite(@PathVariable("siteId") siteId: Long): ResponseEntity<IdResponseDto>{
+        return ResponseEntity.ok(IdResponseDto(siteService.removeSite(siteId)))
     }
 
     // 갱신주기가 되서 유저가 갱신
     // TODO : post 말고 put으로 하는것도 고려해보기
-    @PostMapping("/site/updateCycle/{siteId}")
+    @PostMapping("/site/{siteId}/updateCycle")
     fun updateCycle(
         @PathVariable("siteId") siteId: Long
-    ): String{
-        return siteService.updateCycle(siteId)
+    ):ResponseEntity<IdResponseDto>{
+        return ResponseEntity.ok(IdResponseDto(siteService.updateCycle(siteId)))
     }
 
-    @PostMapping("/site/update/{siteId}")
+    @PostMapping("/site/{siteId}/update")
     fun updateSiteInfo(
         @PathVariable siteId: Long,
         @RequestBody request : SiteUpdateRequestDto
-    ) : String{
-        return siteService.updateSiteInfo(siteId, request)
+    ) : ResponseEntity<IdResponseDto>{
+        return ResponseEntity.ok(IdResponseDto(siteService.updateSiteInfo(siteId, request)))
     }
 }
