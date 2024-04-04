@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +29,7 @@ public class ControllerTest{
 
     @Test
     @DisplayName("정상적인 site 생성")
+    @WithMockUser
     public void createSite() throws Exception {
         var siteAddRequestDto = new SiteAddRequestDto("국민대학교","https://cs.kookmin.ac.kr/",12);
         String json = jacksonObjectMapper().writeValueAsString(siteAddRequestDto);
@@ -42,4 +44,5 @@ public class ControllerTest{
                 .andExpect(jsonPath("$.updateCycle").value(12))
         ;
     }
+
 }

@@ -14,6 +14,11 @@ class MainController (
         return "hello world"
     }
 
+    @GetMapping("/my")
+    fun myPage(): String {
+        return "my"
+    }
+
     @GetMapping("/members")
     fun findAllMember(): List<Member> {
         return memberService.findAllMember()
