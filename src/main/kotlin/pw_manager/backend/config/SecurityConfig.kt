@@ -30,8 +30,8 @@ class SecurityConfig(
 
         http.authorizeHttpRequests {
             authz -> authz
-                    .requestMatchers("/","/oauth2/**","/getTestUser").permitAll()
-                    .requestMatchers("/my").authenticated()
+                    .requestMatchers("/","/oauth2/**").permitAll()
+                    .anyRequest().authenticated()
         }
 
         return http.build()

@@ -28,20 +28,14 @@ class CustomOAuth2UserService(
             else -> throw OAuth2AuthenticationException("registrationId is not naver")
         }
 
-        val username: String = "${oAuth2Response.getProvider()}_${oAuth2Response.getProviderId()}"
-        var member = memberRepository.findByuserHash(username)
+        val userHash: String = "${oAuth2Response.getProvider()}_${oAuth2Response.getProviderId()}"
+        var member = memberRepository.findByuserHash(userHash)
 
         if(member == null){
-            member = Member(username, oAuth2Response.getEmail())
+            member = Member(userHash)
             memberRepository.save(member)
         }
-        else{
-            //Todo : 현재는 email만 업데이트 하지만 username도 업데이트 해야할 필요성이 있다면 추가 수정
-            member.email = oAuth2Response.getEmail()
-        }
 
-        //Todo : role을 Member에 추가시켜야 하는가(해야겠지..?)
-        val role = "USER"
-        return CustomOAuth2User(oAuth2Response, role)
+        return CustomOAuth2User(oAuth2Response)
     }
 }
