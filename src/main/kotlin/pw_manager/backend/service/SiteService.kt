@@ -23,8 +23,7 @@ import java.time.format.DateTimeFormatter.*
 @Transactional(readOnly = true)
 class SiteService (
     private val siteRepository: SiteRepository,
-    private val memberService: MemberService,
-        private val memberRepository: MemberRepository
+    private val memberService: MemberService
 ){
     // TODO : kotlin 엘비스 연산자로만 처리해보기
     fun getAllList(
