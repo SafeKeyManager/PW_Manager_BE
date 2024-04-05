@@ -44,7 +44,7 @@ class SecurityConfig(
 
         http.authorizeHttpRequests {
             authz -> authz
-                    .requestMatchers("/","/oauth2/**","/api/v1/fcm/token").permitAll()
+                    .requestMatchers("/","/oauth2/**").permitAll()
                     .anyRequest().authenticated()
         }
 
