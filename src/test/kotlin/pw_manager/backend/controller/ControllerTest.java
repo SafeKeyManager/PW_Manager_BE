@@ -33,7 +33,7 @@ public class ControllerTest{
     public void createSite() throws Exception {
         var siteAddRequestDto = new SiteAddRequestDto("국민대학교","https://cs.kookmin.ac.kr/",12);
         String json = jacksonObjectMapper().writeValueAsString(siteAddRequestDto);
-
+        System.out.println(json);
         mockMvc.perform(post("/site/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
