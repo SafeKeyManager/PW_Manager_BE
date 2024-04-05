@@ -1,6 +1,7 @@
 package pw_manager.backend.controller
 
 import lombok.extern.slf4j.Slf4j
+import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -28,5 +29,13 @@ class FcmController(
         println("[+] 푸시 메시지를 전송합니다. ")
         val result = fcmService.sendMessageTo(fcmSendDto)
         return "ok"
+    }
+
+    @PostMapping("/token")
+    fun getDeviceToken(
+        @RequestBody fcmtoken:String
+    ) : ResponseEntity<String>{
+        println("받은 fcmdevicetoken :  $fcmtoken")
+        return ResponseEntity.ok().body(fcmtoken)
     }
 }
