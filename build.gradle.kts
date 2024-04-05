@@ -45,6 +45,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	testImplementation("org.springframework.security:spring-security-test")
 
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+	implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+	implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+
+
 	implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
 	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 	kapt("jakarta.annotation:jakarta.annotation-api")

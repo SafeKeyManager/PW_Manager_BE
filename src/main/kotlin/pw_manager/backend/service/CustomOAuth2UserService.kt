@@ -18,9 +18,9 @@ class CustomOAuth2UserService(
     override fun loadUser(userRequest: OAuth2UserRequest?): OAuth2User {
         //userRequest가 null인지 체크
         val nonNullUserRequest = userRequest ?: throw OAuth2AuthenticationException("userRequest is null")
-
+        println("accessToken : ${userRequest.accessToken.tokenValue}")
         val oAuth2User = super.loadUser(nonNullUserRequest)
-        println(oAuth2User.attributes)
+        //println(oAuth2User.attributes)
 
         val registrationId = userRequest.clientRegistration.registrationId
         val oAuth2Response = when (registrationId){
@@ -36,6 +36,6 @@ class CustomOAuth2UserService(
             memberRepository.save(member)
         }
 
-        return CustomOAuth2User(oAuth2Response)
+        return CustomOAuth2User(member)
     }
 }
