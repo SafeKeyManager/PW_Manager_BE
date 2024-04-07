@@ -1,14 +1,12 @@
 package pw_manager.backend.service
 
 import lombok.RequiredArgsConstructor
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import pw_manager.backend.entity.Member
 import pw_manager.backend.repository.MemberRepository
-import pw_manager.backend.user.CustomOAuth2User
+import java.lang.RuntimeException
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +18,13 @@ class MemberService (
         return memberRepository.findAll()
     }
 
-    @Transactional
-    fun saveMember(member: Member): Member{
-        return memberRepository.save(member)
+    fun findMemberOnd():Member{
+        memberRepository.findUserAndSites(SecurityContextHolder.getContext().authentication.name)
+            ?.let{
+                return it
+            }
+            // TODO : exception 추가하기
+            ?: throw RuntimeException();
     }
 
     @Transactional
@@ -30,7 +32,7 @@ class MemberService (
 
         val name : String = SecurityContextHolder.getContext().authentication.name
 
-        val member = memberRepository.findByuserHash(name)
+        val member = memberRepository.findByUserHash(name)
         if(member == null) {
             println("member is null")
             return

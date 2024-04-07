@@ -1,14 +1,9 @@
 package pw_manager.backend.config
 
-import jakarta.servlet.http.Cookie
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer.UserInfoEndpointConfig
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import pw_manager.backend.service.CustomOAuth2UserService
@@ -35,7 +30,8 @@ class SecurityConfig(
                 endpoint -> endpoint.userService(customOAuth2UserService)
             }
                 .successHandler { request, response, authentication ->
-                    val jwtToken : String = jwtUtil.createJwt(authentication.getName(), "USER", 60 * 60 * 10L)
+                    // TODO : 지금은 개발을 위해서 토큰 유지 시간 증가. 배포시 시간 되돌리기
+                    val jwtToken : String = jwtUtil.createJwt(authentication.getName(), "USER", 60 * 60 * 60 * 10L)
                     println(jwtToken)
                     val redirectUri = "secretmanagerapp://oauthcallback?token=${jwtToken}"
                     response.sendRedirect(redirectUri)

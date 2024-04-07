@@ -2,21 +2,18 @@ package pw_manager.backend.service
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.data.repository.findByIdOrNull
-import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import pw_manager.backend.dto.request.SearchDto
 import pw_manager.backend.dto.request.SiteAddRequestDto
 import pw_manager.backend.dto.request.SiteUpdateRequestDto
 import pw_manager.backend.dto.response.SiteAddResponseDto
-import pw_manager.backend.entity.Member
 import pw_manager.backend.entity.Site
 import pw_manager.backend.entity.Site.SiteStatus.*
 import pw_manager.backend.exception.ErrorCode.*
 import pw_manager.backend.exception.SiteException
 import pw_manager.backend.repository.SiteRepository
-import pw_manager.backend.user.CustomOAuth2User
 import java.time.format.DateTimeFormatter.*
 
 @Service
@@ -46,20 +43,25 @@ class SiteService (
         }
     }
 
+    fun getAllMyList(
+        searchDto: SearchDto,
+        pageable: Pageable
+    ): List<Site> {
+        return siteRepository.findSiteByUserHash(SecurityContextHolder.getContext().authentication.name)
+    }
+
     @Transactional
     fun addSite(request : SiteAddRequestDto): Site{
-        // TODO : oauth2 기능 만들고 삭제하기
-        val member = Member("password")
-        val saveMember = memberService.saveMember(member)
-        val saveSite = siteRepository.save(Site(saveMember, request.siteName, request.siteUrl, request.siteCycle))
+        val member = memberService.findMemberOnd()
+        val saveSite = siteRepository.save(Site(member, request.siteName, request.siteUrl, request.siteCycle))
         // TODO : Entity 내부적으로 연관관계 처리하기
-        saveMember.sites.add(saveSite)
+        member.sites.add(saveSite)
         return saveSite
     }
 
     @Transactional
     fun removeSite(siteId: Long): Long?{
-        siteRepository.findByIdOrNull(siteId)
+        findSite(siteId)
             ?.let {
                 it.siteStatus = DELETE
                 return it.id
@@ -71,7 +73,7 @@ class SiteService (
 
     @Transactional
     fun updateCycle(siteId: Long): Long? {
-        siteRepository.findByIdOrNull(siteId)
+        findSite(siteId)
             ?.let {
                 it.updateDate = it.updateDate.plusDays(it.updateCycle)
                 return it.id
@@ -81,10 +83,15 @@ class SiteService (
 
     @Transactional
     fun updateSiteInfo(siteId: Long, request: SiteUpdateRequestDto): Long? {
-        siteRepository.findByIdOrNull(siteId)?.let {
+        findSite(siteId)?.let {
             it.updateSite(request)
             return it.id
         }
         ?: throw SiteException(NOT_FOUND)
+    }
+
+    fun findSite(siteId: Long): Site? {
+        // TODO : 권한 체크를 해줘야 될까?
+        return siteRepository.findSiteByIdAndUserHashOrNull(siteId, SecurityContextHolder.getContext().authentication.name)
     }
 }
