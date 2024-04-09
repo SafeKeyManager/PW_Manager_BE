@@ -13,7 +13,7 @@ class MemberRepositoryImpl(
         return query
             .selectFrom(member)
             .where(member.userHash.eq(userHash))
-            .join(member.sites, site).fetchJoin()
+            .leftJoin(member.sites, site).fetchJoin()
             .fetchOne()
     }
 }
