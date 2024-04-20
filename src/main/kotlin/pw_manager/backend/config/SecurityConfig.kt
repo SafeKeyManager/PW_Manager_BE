@@ -31,7 +31,7 @@ class SecurityConfig(
             }
                 .successHandler { request, response, authentication ->
                     // TODO : 지금은 개발을 위해서 토큰 유지 시간 증가. 배포시 시간 되돌리기
-                    val jwtToken : String = jwtUtil.createJwt(authentication.getName(), "USER", 60 * 60 * 60 * 10L)
+                    val jwtToken : String = jwtUtil.createJwt(authentication.name, "USER", 60 * 60 * 60 * 10L)
                     println(jwtToken)
                     val redirectUri = "secretmanagerapp://oauthcallback?token=${jwtToken}"
                     response.sendRedirect(redirectUri)
