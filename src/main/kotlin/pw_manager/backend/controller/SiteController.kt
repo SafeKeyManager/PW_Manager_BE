@@ -39,7 +39,7 @@ class SiteController (
     fun getMySiteList(
         searchDto: SearchDto,
         @PageableDefault(size = 10)
-        pageable: Pageable): ResponseEntity<List<Site>>{
+        pageable: Pageable): ResponseEntity<Page<Site>>{
         return ResponseEntity.ok(siteService.getAllMyList(searchDto, pageable))
     }
 

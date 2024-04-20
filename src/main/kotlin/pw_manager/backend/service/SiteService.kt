@@ -46,9 +46,10 @@ class SiteService (
     fun getAllMyList(
         searchDto: SearchDto,
         pageable: Pageable
-    ): List<Site> {
-        // TODO : search, pagination
-        return siteRepository.findSiteByUserHash(SecurityContextHolder.getContext().authentication.name)
+    ): Page<Site> {
+        val name = SecurityContextHolder.getContext().authentication.name
+        System.out.println(name);
+        return siteRepository.findSiteByUserHash(name, searchDto, pageable)
     }
 
     @Transactional
