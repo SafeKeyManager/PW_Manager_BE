@@ -1,0 +1,46 @@
+= API Documentation
+:doctype: book
+:icons: font
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectnumlevels: 4
+:source-highlighter: prettify
+
+[[overview]]
+== Overview
+Welcome to our API documentation. Here you will find all the information you need to effectively use our API.
+
+[[authentication]]
+== Authentication
+This API uses JWT (JSON Web Token) for authentication. Ensure to include a valid `Authorization` header with a Bearer token in all requests to the API as shown below:
+[source,http,options="nowrap"]
+----
+Authorization: Bearer {jwtToken}
+----
+
+[[addSite]]
+== Add Site
+This endpoint allows you to add a new site to the system.
+
+=== HTTP Request
+`POST /site/add`
+
+==== Request Headers
+include::{snippets}/addSite/http-request.adoc[]
+
+==== Request Body
+include::{snippets}/addSite/request-body.adoc[]
+
+==== cURL Example
+include::{snippets}/addSite/curl-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/addSite/http-response.adoc[]
+
+==== Response Fields
+include::{snippets}/addSite/response-fields.adoc[]
+
+[[conclusion]]
+== Conclusion
+Thank you for using our API. We hope this documentation helps you integrate our services smoothly into your application.

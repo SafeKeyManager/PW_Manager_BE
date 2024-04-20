@@ -3,26 +3,37 @@ package pw_manager.backend.controller
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.objectweb.asm.Type
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
+import org.springframework.boot.test.autoconfigure.restdocs.RestDocsAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
-import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.restdocs.RestDocumentationExtension
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
+import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import pw_manager.backend.RestDocsConfiguration
 import pw_manager.backend.dto.request.SiteAddRequestDto
 import pw_manager.backend.entity.Member
 import pw_manager.backend.entity.Site
 import pw_manager.backend.service.SiteService
 import pw_manager.backend.util.JWTUtil
 
+@ExtendWith(SpringExtension::class)
+@AutoConfigureRestDocs
+@Import(RestDocsConfiguration::class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -60,6 +71,15 @@ class SiteControllerTest{
                 .content(json))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isCreated)
+                .andDo(document("addSite", responseFields(
+                        fieldWithPath("id").description("사이트 DB Id").type(Long::class),
+                        fieldWithPath("siteName").description("사이트 이름"),
+                        fieldWithPath("siteUrl").description("사이트 주소"),
+                        fieldWithPath("updateCycle").description("비밀번호 변경 주기"),
+                        fieldWithPath("createDate").description("사이트 추가 날짜"),
+                        fieldWithPath("updateDate").description("다음 비밀번호 변경 날짜"),
+                        fieldWithPath("siteStatus").description("사이트 현재 상태"),
+                )))
 
     }
 

@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.2.4"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("org.asciidoctor.jvm.convert") version "3.3.2"
 	kotlin("jvm") version "1.9.23"
 	kotlin("plugin.spring") version "1.9.23"
 	kotlin("plugin.jpa") version "1.9.23"
@@ -20,11 +21,15 @@ configurations {
 	compileOnly {
 		extendsFrom(configurations.annotationProcessor.get())
 	}
+
 }
 
 repositories {
 	mavenCentral()
 }
+val asciidoctorExt: Configuration by configurations.creating
+val snippetsDir by extra { file("build/generated-snippets") }
+val mainAdocDir = file("src/docs/asciidoc")
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -55,6 +60,9 @@ dependencies {
 	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 	kapt("jakarta.annotation:jakarta.annotation-api")
 	kapt("jakarta.persistence:jakarta.persistence-api")
+
+	testImplementation ("org.springframework.restdocs:spring-restdocs-mockmvc")
+	asciidoctorExt ("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
 tasks.withType<KotlinCompile> {
@@ -64,6 +72,35 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-tasks.withType<Test> {
+tasks.test {
 	useJUnitPlatform()
+	// Test 결과를 snippet Directory에 출력
+	outputs.dir(snippetsDir)
+	println("=======================================================")
+	println("test완료")
 }
+
+// Ascii Doc Create Tasks
+tasks {
+
+	asciidoctor {
+		inputs.dir(snippetsDir)
+		configurations("asciidoctorExt")
+		dependsOn(test)
+		println("=======================================================")
+		println("asciidoctor 완료")
+	}
+
+	// 7. bootJar Settings
+	bootJar {
+		dependsOn(asciidoctor)
+		from ("build/asciidoc/html5") {
+			into("static/docs")
+		}
+		println("=======================================================")
+		println("bootjar 완료")
+	}
+
+}
+
+
