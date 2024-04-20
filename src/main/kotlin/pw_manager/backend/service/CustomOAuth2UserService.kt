@@ -29,11 +29,11 @@ class CustomOAuth2UserService(
         }
 
         val userHash: String = "${oAuth2Response.getProvider()}_${oAuth2Response.getProviderId()}"
-        var member = memberRepository.findByuserHash(userHash)
+        var member = memberRepository.findByUserHash(userHash)
 
         if(member == null){
             member = Member(userHash)
-            memberRepository.save(member)
+            memberRepository.save(Member(userHash))
         }
 
         return CustomOAuth2User(member)

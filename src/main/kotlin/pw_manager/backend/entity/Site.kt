@@ -3,6 +3,7 @@ package pw_manager.backend.entity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import jakarta.persistence.EnumType.*
+import jakarta.persistence.FetchType.*
 import pw_manager.backend.dto.request.SiteUpdateRequestDto
 import pw_manager.backend.entity.Site.SiteStatus.*
 import java.time.LocalDateTime
@@ -10,7 +11,7 @@ import java.time.LocalDateTime.*
 
 @Entity
 class Site(
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_Id")
     @JsonIgnore
     val member: Member,
