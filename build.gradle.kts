@@ -28,8 +28,6 @@ repositories {
 	mavenCentral()
 }
 val asciidoctorExt: Configuration by configurations.creating
-val snippetsDir by extra { file("build/generated-snippets") }
-val mainAdocDir = file("src/docs/asciidoc")
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -74,33 +72,31 @@ tasks.withType<KotlinCompile> {
 
 tasks.test {
 	useJUnitPlatform()
-	// Test 결과를 snippet Directory에 출력
-	outputs.dir(snippetsDir)
-	println("=======================================================")
-	println("test완료")
+	//outputs.dir(snippetsDir) -> @AutoConfigureRestDocs가 자동 설정
+	finalizedBy(tasks.asciidoctor)
 }
 
-// Ascii Doc Create Tasks
-tasks {
 
-	asciidoctor {
-		inputs.dir(snippetsDir)
-		configurations("asciidoctorExt")
-		dependsOn(test)
-		println("=======================================================")
-		println("asciidoctor 완료")
-	}
-
-	// 7. bootJar Settings
-	bootJar {
-		dependsOn(asciidoctor)
-		from ("build/asciidoc/html5") {
-			into("static/docs")
-		}
-		println("=======================================================")
-		println("bootjar 완료")
-	}
-
+tasks.asciidoctor {
+	dependsOn(tasks.test)
+	attributes(mapOf(
+			"snippets" to file("build/generated-snippets").absolutePath
+	))
+	finalizedBy("copyDocument")
 }
 
+tasks.register("copyDocument", Copy::class){
+	doFirst {
+		delete(file("src/main/resources/static/docs"))
+	}
+	from(file("build/docs/asciidoc"))
+	into(file("src/main/resources/static/docs"))
+}
+
+tasks.bootJar {
+	dependsOn(tasks.asciidoctor)
+	from ("build/docs/asciidoc/html5") {
+		into("static/docs")
+	}
+}
 

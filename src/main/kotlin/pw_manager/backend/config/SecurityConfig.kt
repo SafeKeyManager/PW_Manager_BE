@@ -40,7 +40,7 @@ class SecurityConfig(
 
         http.authorizeHttpRequests {
             authz -> authz
-                    .requestMatchers("/","/oauth2/**").permitAll()
+                    .requestMatchers("/","/oauth2/**","/docs/**").permitAll()
                     .anyRequest().authenticated()
         }
 
