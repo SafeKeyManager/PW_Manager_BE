@@ -66,10 +66,49 @@ This API uses JWT (JSON Web Token) for authentication. Ensure to include a valid
 ----
 Authorization: Bearer {jwtToken}
 ----
+[[getSiteList]]
+== 사이트 검색하기
+search 키워드와 페이지로 Site 검색
+
+=== HTTP Request
+`GET /site`
+
+==== Request Headers
+include::{snippets}/getSiteList/http-request.adoc[]
+
+==== Request Body
+//include::{snippets}/getSiteList/request-body.adoc[]
+
+==== cURL Example
+include::{snippets}/getSiteList/curl-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/getSiteList/http-response.adoc[]
+
+==== Response Fields
+//include::{snippets}/getSiteList/response-fields.adoc[]
+
+[[getMySiteList]]
+== Site 정보 가져오기
+유저의 Site 정보 가져오기
+
+=== HTTP Request
+`GET /sites`
+
+==== Request Headers
+include::{snippets}/getMySiteList/http-request.adoc[]
+
+==== Request Body
+include::{snippets}/getMySiteList/request-body.adoc[]
+
+==== cURL Example
+include::{snippets}/getMySiteList/curl-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/getMySiteList/http-response.adoc[]
 
 [[addSite]]
-== Add Site
-This endpoint allows you to add a new site to the system.
+== 사이트 추가하기
 
 === HTTP Request
 `POST /site/add`
@@ -88,6 +127,62 @@ include::{snippets}/addSite/http-response.adoc[]
 
 ==== Response Fields
 include::{snippets}/addSite/response-fields.adoc[]
+
+[[removeSite]]
+== 사이트 삭제하기
+
+=== HTTP Request
+`DELETE /site/{siteId}/delete`
+
+==== Request Headers
+include::{snippets}/removeSite/http-request.adoc[]
+
+==== Request Body
+include::{snippets}/removeSite/request-body.adoc[]
+
+==== cURL Example
+include::{snippets}/removeSite/curl-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/removeSite/http-response.adoc[]
+
+[[updateCycle]]
+== 사이트의 비밀번호 변경시
+사이트의 비밀번호 변경시
+
+=== HTTP Request
+`PUT /site/{siteId}/updateCycle`
+
+==== Request Headers
+include::{snippets}/updateCycle/http-request.adoc[]
+
+==== Request Body
+include::{snippets}/updateCycle/request-body.adoc[]
+
+==== cURL Example
+include::{snippets}/updateCycle/curl-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/updateCycle/http-response.adoc[]
+
+[[updateSiteInfo]]
+== 사이트의 정보 변경
+유저가 사이트의 정보 변경
+
+=== HTTP Request
+`POST /site/{siteId}/update`
+
+==== Request Headers
+include::{snippets}/updateSiteInfo/http-request.adoc[]
+
+==== Request Body
+include::{snippets}/updateSiteInfo/request-body.adoc[]
+
+==== cURL Example
+include::{snippets}/updateSiteInfo/curl-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/updateSiteInfo/http-response.adoc[]
 
 [[conclusion]]
 == Conclusion

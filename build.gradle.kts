@@ -100,3 +100,7 @@ tasks.bootJar {
 	}
 }
 
+tasks.build {
+	dependsOn(tasks.asciidoctor)
+}
+

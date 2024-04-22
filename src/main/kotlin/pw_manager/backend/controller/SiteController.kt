@@ -6,11 +6,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import pw_manager.backend.dto.request.SearchDto
 import pw_manager.backend.dto.request.SiteAddRequestDto
@@ -59,14 +55,14 @@ class SiteController (
     }
 
     // TODO : request 요청을 post가 맞는지 delete가 맞는지 아직 고민중
-    @PostMapping("/site/{siteId}/delete")
+    @DeleteMapping("/site/{siteId}/delete")
     fun removeSite(@PathVariable("siteId") siteId: Long): ResponseEntity<IdResponseDto>{
         return ResponseEntity.ok(IdResponseDto(siteService.removeSite(siteId)))
     }
 
     // 갱신주기가 되서 유저가 갱신
     // TODO : post 말고 put으로 하는것도 고려해보기
-    @PostMapping("/site/{siteId}/updateCycle")
+    @PutMapping("/site/{siteId}/updateCycle")
     fun updateCycle(
         @PathVariable("siteId") siteId: Long
     ):ResponseEntity<IdResponseDto>{
