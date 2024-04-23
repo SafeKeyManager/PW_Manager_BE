@@ -61,6 +61,11 @@ dependencies {
 
 	testImplementation ("org.springframework.restdocs:spring-restdocs-mockmvc")
 	asciidoctorExt ("org.springframework.restdocs:spring-restdocs-asciidoctor")
+
+
+	implementation ("org.springframework.boot:spring-boot-starter-batch")
+	testImplementation ("org.springframework.batch:spring-batch-test")
+
 }
 
 tasks.withType<KotlinCompile> {
