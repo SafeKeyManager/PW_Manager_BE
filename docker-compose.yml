@@ -4,12 +4,9 @@ services:
     container_name: mysql_db
     image: mysql:latest
     #restart: unless-stopped
+    env_file:
+      - ./database.env
     environment:
-      MYSQL_USER: manager1
-      MYSQL_PASSWORD: pass
-      MYSQL_DATABASE: pwmanager
-      MYSQL_ROOT_HOST: '%'
-      MYSQL_ROOT_PASSWORD: 0513
       TZ: 'Asia/Seoul'
     ports:
       - "3306:3306"
@@ -26,16 +23,8 @@ services:
       dockerfile: dockerfile
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/pwmanager?allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: manager1
-      SPRING_DATASOURCE_PASSWORD: pass
-      SPRING_JWT_SECRET: "qwertyuiopasdfghjklzxcvbnmqwerty"
-      # TODO : 로그인 환경변수 설정이 안됨
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_NAVER_CLIENT-id: "bwg3REhpAM3hFieATsBv"
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_NAVER_CLIENT-SECRET: "XRXlXr4NVf"
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_NAVER_REDIRECT-URI: "http://192.168.219.104:8080/login/oauth2/code/naver"
-
+    env_file:
+      - ./application.env
     depends_on:
       - database
     networks:
