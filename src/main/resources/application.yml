@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${spring_db_url}
-    username: ${spring_db_username}
-    password: ${spring_db_password}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -20,9 +20,9 @@ spring:
         registration:
           naver:
             client-name: naver
-            client-id: ${naver-client-id}
-            client-secret: ${naver-client-secret}
-            redirect-uri: ${naver-redirect-uri}
+            client-id: ${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_NAVER_CLIENT-id}
+            client-secret: ${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_NAVER_CLIENT-SECRET}
+            redirect-uri: ${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_NAVER_REDIRECT-URI}
             authorization-grant-type: authorization_code
             scope:
               - name
@@ -35,7 +35,7 @@ spring:
             user-name-attribute: response
 
   jwt:
-    secret: ${spring_jwt_secret}
+    secret: ${SPRING_JWT_SECRET}
 
 logging:
   level:
