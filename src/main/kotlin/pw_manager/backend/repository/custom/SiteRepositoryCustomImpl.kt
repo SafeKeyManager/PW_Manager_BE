@@ -12,6 +12,7 @@ import pw_manager.backend.entity.QSite
 import pw_manager.backend.entity.QSite.*
 import pw_manager.backend.entity.Site
 import pw_manager.backend.entity.Site.SiteStatus.*
+import java.time.LocalDateTime.now
 import java.util.function.LongSupplier
 
 class SiteRepositoryCustomImpl(
@@ -24,7 +25,7 @@ class SiteRepositoryCustomImpl(
                 .where(
                     site.member.userHash.eq(userHash),
                     searchEq(search.search),
-                    siteNotDelete()
+                    siteNotDelete(site)
                 )
                 .offset(pageable.offset)
                 .limit(pageable.pageSize.toLong())
@@ -37,7 +38,7 @@ class SiteRepositoryCustomImpl(
                 .where(
                     site.member.userHash.eq(userHash),
                     searchEq(search.search),
-                    siteNotDelete()
+                    siteNotDelete(site)
                 )
 
             return PageableExecutionUtils.getPage(
@@ -48,8 +49,8 @@ class SiteRepositoryCustomImpl(
         }
 
     // TODO : 삭제처리 어떻게 할지
-    private fun siteNotDelete(): BooleanExpression {
-        return QSite.site.siteStatus.eq(DELETE).not()
+    private fun siteNotDelete(site: QSite): BooleanExpression {
+        return site.siteStatus.eq(DELETE).not()
     }
 
     private fun searchEq(search: String): BooleanExpression? {
@@ -66,5 +67,14 @@ class SiteRepositoryCustomImpl(
             .where(member.userHash.eq(userHash),
                 site.id.eq(siteId))
             .fetchOne()
+    }
+
+    override fun findExpiredSiteAndUser(): List<Site> {
+        return query
+            .selectFrom(site)
+            .join(site.member, member).fetchJoin()
+            .where(site.updateDate.loe(now()),
+                siteNotDelete(site))
+            .fetch()
     }
 }

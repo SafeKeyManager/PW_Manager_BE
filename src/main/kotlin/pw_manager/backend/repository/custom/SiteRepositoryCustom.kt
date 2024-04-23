@@ -10,4 +10,6 @@ interface SiteRepositoryCustom {
 
     fun findSiteByIdAndUserHashOrNull(siteId: Long, userHash: String): Site?
 
+    fun findExpiredSiteAndUser(): List<Site>
+
 }

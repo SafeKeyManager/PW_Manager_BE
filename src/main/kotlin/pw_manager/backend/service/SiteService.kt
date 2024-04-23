@@ -52,6 +52,14 @@ class SiteService (
         return siteRepository.findSiteByUserHash(name, searchDto, pageable)
     }
 
+    /**
+     * 기간이 경과된 site && user 조회
+     */
+    fun getAllExpiredSiteAndUser():List<Site>{
+        // TODO : return 값이 null 이면?
+        return siteRepository.findExpiredSiteAndUser()
+    }
+
     @Transactional
     fun addSite(request : SiteAddRequestDto): Site{
         val member = memberService.findMemberOnd()
