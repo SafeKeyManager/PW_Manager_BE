@@ -650,7 +650,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">GET /site?searchDto=&amp;page=2&amp;size=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MiwiZXhwIjoxNzEzOTMxNzQyfQ.XBvTk-H91Ezdn2XhgCgYm5JnLZ-P6oTVaG0NZOpNLQc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NywiZXhwIjoxNzE0MDE2NDQ3fQ.LLQlPnIZN6Lzus-iXSvjyq1fLrPCIUFxaDWYm8OP5X4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -664,7 +664,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/site?searchDto=&amp;page=2&amp;size=10' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MiwiZXhwIjoxNzEzOTMxNzQyfQ.XBvTk-H91Ezdn2XhgCgYm5JnLZ-P6oTVaG0NZOpNLQc'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NywiZXhwIjoxNzE0MDE2NDQ3fQ.LLQlPnIZN6Lzus-iXSvjyq1fLrPCIUFxaDWYm8OP5X4'</code></pre>
 </div>
 </div>
 </div>
@@ -766,8 +766,8 @@ Content-Length: 2505
       "unsorted" : true
     },
     "offset" : 20,
-    "paged" : true,
-    "unpaged" : false
+    "unpaged" : false,
+    "paged" : true
   },
   "last" : false,
   "totalElements" : 50,
@@ -809,7 +809,7 @@ Content-Length: 2505
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">GET /sites?searchDto=&amp;page=2&amp;size=10 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MSwiZXhwIjoxNzEzOTMxNzQxfQ.miKhe64RCsbNN3AXSi-l5yWd-P25F-5XjGkA6u63T6s
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NSwiZXhwIjoxNzE0MDE2NDQ1fQ.BKBATwUyqxblzstPGlD2ML58ssM3lYslVFRviN-5rNQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -827,7 +827,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/sites?searchDto=&amp;page=2&amp;size=10' -i -X GET \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MSwiZXhwIjoxNzEzOTMxNzQxfQ.miKhe64RCsbNN3AXSi-l5yWd-P25F-5XjGkA6u63T6s'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NSwiZXhwIjoxNzE0MDE2NDQ1fQ.BKBATwUyqxblzstPGlD2ML58ssM3lYslVFRviN-5rNQ'</code></pre>
 </div>
 </div>
 </div>
@@ -854,80 +854,80 @@ Content-Length: 3135
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 22",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 23",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 24",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 25",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 26",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 27",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 28",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 29",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   }, {
     "siteName" : "국민대학교 30",
     "siteUrl" : "https://kookmin.co.kr",
     "updateCycle" : 12,
     "id" : null,
-    "createDate" : "2024-04-24T12:33:01.0026581",
-    "updateDate" : "2024-05-24T12:33:01.0026581",
+    "createDate" : "2024-04-25T12:04:45.4047541",
+    "updateDate" : "2024-05-25T12:04:45.4047541",
     "siteStatus" : "REGIS"
   } ],
   "pageable" : {
@@ -939,8 +939,8 @@ Content-Length: 3135
       "unsorted" : true
     },
     "offset" : 20,
-    "paged" : true,
-    "unpaged" : false
+    "unpaged" : false,
+    "paged" : true
   },
   "last" : false,
   "totalElements" : 50,
@@ -976,7 +976,7 @@ Content-Length: 3135
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">POST /site/add HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MiwiZXhwIjoxNzEzOTMxNzQyfQ.XBvTk-H91Ezdn2XhgCgYm5JnLZ-P6oTVaG0NZOpNLQc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NywiZXhwIjoxNzE0MDE2NDQ3fQ.LLQlPnIZN6Lzus-iXSvjyq1fLrPCIUFxaDWYm8OP5X4
 Content-Length: 101
 Host: localhost:8080
 
@@ -1006,7 +1006,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/site/add' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MiwiZXhwIjoxNzEzOTMxNzQyfQ.XBvTk-H91Ezdn2XhgCgYm5JnLZ-P6oTVaG0NZOpNLQc' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NywiZXhwIjoxNzE0MDE2NDQ3fQ.LLQlPnIZN6Lzus-iXSvjyq1fLrPCIUFxaDWYm8OP5X4' \
     -d '{
   "siteName" : "국민대학교 0",
   "siteUrl" : "https://kookmin.co.kr",
@@ -1038,8 +1038,8 @@ Content-Length: 242
   "siteUrl" : "https://kookmin.co.kr",
   "updateCycle" : 12,
   "id" : null,
-  "createDate" : "2024-04-24T12:33:02.6846908",
-  "updateDate" : "2024-05-24T12:33:02.6846908",
+  "createDate" : "2024-04-25T12:04:47.1739208",
+  "updateDate" : "2024-05-25T12:04:47.1739208",
   "siteStatus" : "REGIS"
 }</code></pre>
 </div>
@@ -1115,7 +1115,7 @@ Content-Length: 242
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">DELETE /site/3/delete HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MiwiZXhwIjoxNzEzOTMxNzQyfQ.XBvTk-H91Ezdn2XhgCgYm5JnLZ-P6oTVaG0NZOpNLQc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NiwiZXhwIjoxNzE0MDE2NDQ2fQ.6AYBOuBIYRfVymbD1LIKjkELnDWKPCoNVaGg03jS88U
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1133,7 +1133,7 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/site/3/delete' -i -X DELETE \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MiwiZXhwIjoxNzEzOTMxNzQyfQ.XBvTk-H91Ezdn2XhgCgYm5JnLZ-P6oTVaG0NZOpNLQc'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NiwiZXhwIjoxNzE0MDE2NDQ2fQ.6AYBOuBIYRfVymbD1LIKjkELnDWKPCoNVaGg03jS88U'</code></pre>
 </div>
 </div>
 </div>
@@ -1179,7 +1179,7 @@ Content-Length: 16
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">PUT /site/3/updateCycle HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU3OCwiZXhwIjoxNzEzOTMxNzM4fQ.Fs9lrk4qXiQN-9qvoGfpFAfRmTQbtXVvOYs7jBzs6n8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4MywiZXhwIjoxNzE0MDE2NDQzfQ.skK2OlWyPo4aPKKZPcjdqxLL5KOcTedXHwg5crWpZck
 Host: localhost:8080
 Content-Type: application/x-www-form-urlencoded</code></pre>
 </div>
@@ -1198,7 +1198,7 @@ Content-Type: application/x-www-form-urlencoded</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/site/3/updateCycle' -i -X PUT \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU3OCwiZXhwIjoxNzEzOTMxNzM4fQ.Fs9lrk4qXiQN-9qvoGfpFAfRmTQbtXVvOYs7jBzs6n8'</code></pre>
+    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4MywiZXhwIjoxNzE0MDE2NDQzfQ.skK2OlWyPo4aPKKZPcjdqxLL5KOcTedXHwg5crWpZck'</code></pre>
 </div>
 </div>
 </div>
@@ -1245,7 +1245,7 @@ Content-Length: 16
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">POST /site/3/update HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MywiZXhwIjoxNzEzOTMxNzQzfQ.1snLVCYPbfxwSF9K6tDHin8mg0iE61yFzCztCkqEPsk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NywiZXhwIjoxNzE0MDE2NDQ3fQ.LLQlPnIZN6Lzus-iXSvjyq1fLrPCIUFxaDWYm8OP5X4
 Content-Length: 100
 Host: localhost:8080
 
@@ -1275,7 +1275,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/site/3/update' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxMzkyOTU4MywiZXhwIjoxNzEzOTMxNzQzfQ.1snLVCYPbfxwSF9K6tDHin8mg0iE61yFzCztCkqEPsk' \
+    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im1lbWJlcjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNDAxNDI4NywiZXhwIjoxNzE0MDE2NDQ3fQ.LLQlPnIZN6Lzus-iXSvjyq1fLrPCIUFxaDWYm8OP5X4' \
     -d '{
   "siteName" : "민국대학교",
   "siteUrl" : "http://minkook.co.kr",
@@ -1322,7 +1322,7 @@ Content-Length: 16
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2024-04-24 01:45:31 +0900
+Last updated 2024-04-25 11:41:52 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

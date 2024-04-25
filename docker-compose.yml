@@ -2,7 +2,7 @@ version: "0.0.1"
 services:
   database:
     container_name: mysql_db
-    image: mysql:latest
+    image: mysql/mysql-server:latest
     #restart: unless-stopped
     env_file:
       - ./database.env
