@@ -5,4 +5,4 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
 
-spring_jwt_secret: thisistestsecretkey1234567891234
+SPRING_JWT_SECRET: thisistestsecretkey1234567891234
