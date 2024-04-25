@@ -30,7 +30,7 @@ services:
     networks:
       - backend-net
 
-  web:
+  nginx:
     image: nginx:1.15-alpine
     restart: unless-stopped
     volumes:
@@ -45,7 +45,15 @@ services:
       - database
     networks:
       - backend-net
-
-
+      
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - backend-net
 networks:
   backend-net:
